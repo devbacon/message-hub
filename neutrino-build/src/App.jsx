@@ -8,6 +8,10 @@ export default class App extends Component {
     name: 'App',
   };
 
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <div className="App">
