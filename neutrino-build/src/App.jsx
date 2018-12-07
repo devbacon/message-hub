@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import axios from 'axios';
+
 import './App.css';
 
 import Conversation from './Conversation';
@@ -9,7 +11,14 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    
+    axios.get('https://sec.meetkaruna.com/api/v1/conversations')
+      .then((req, res) => {
+        /* eslint-disable */
+        console.log(req, res);
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   render() {
