@@ -8,8 +8,7 @@ import Conversation from './Conversation';
 
 export default class App extends Component {
   state = {
-    name: 'App',
-    conversations: null
+    conversations: null,
   };
 
   componentDidMount() {
@@ -25,7 +24,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome to {this.state.name}</h1>
         <Conversation.List />
       </div>
     );
