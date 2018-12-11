@@ -5,6 +5,7 @@ import axios from 'axios';
 import './App.css';
 
 import Conversation from './Conversation';
+import { all } from 'rsvp';
 
 export default class App extends Component {
   state = {
@@ -14,11 +15,13 @@ export default class App extends Component {
   componentDidMount() {
     axios.get('https://sec.meetkaruna.com/api/v1/conversations')
       .then((res) => {
-        this.setState({ conversations: res.data });
-      })
-      .catch((err) => {
-        throw err;
-      });
+        const conversationPromises = [], pageTotal = Math.ceil(res.data.total / res.data.per_page);
+        
+        for(let i = 0; i < pageTotal; i++) {
+          const currentConversations = axios.get(`https://sec.meetkaruna.com/api/v1/conversations?page=${i}`);
+          conversationPromises.push(currentConversations);
+        }
+    });
   }
 
   render() {
