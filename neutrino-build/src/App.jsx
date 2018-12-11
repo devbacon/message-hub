@@ -9,12 +9,13 @@ import Conversation from './Conversation';
 export default class App extends Component {
   state = {
     name: 'App',
+    conversations: null
   };
 
   componentDidMount() {
     axios.get('https://sec.meetkaruna.com/api/v1/conversations')
-      .then((req, res) => {
-        console.log(req, res);
+      .then((res) => {
+        this.setState({ conversations: res.data });
       })
       .catch((err) => {
         throw err;
