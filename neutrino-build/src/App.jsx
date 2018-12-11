@@ -21,6 +21,13 @@ export default class App extends Component {
           const currentConversations = axios.get(`https://sec.meetkaruna.com/api/v1/conversations?page=${i}`);
           conversationPromises.push(currentConversations);
         }
+
+        Promise.all(conversationPromises)
+          .then((res) => {
+            const allConversations = res.reduce((curr, response) => curr.concat(response.data.data), []);
+
+            this.setState({ conversations: allConversations });
+          });
     });
   }
 
